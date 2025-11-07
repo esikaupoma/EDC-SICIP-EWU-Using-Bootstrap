@@ -147,3 +147,66 @@ class HomePage extends HTMLElement {
 }
 
 customElements.define('home-page', HomePage);
+
+
+// =====================================================================
+// Professional Scroll Animation with Intersection Observer API
+// =====================================================================
+
+/**
+ * Industry-standard scroll animation implementation
+ * Uses Intersection Observer for optimal performance
+ * Triggers fade-up animations when elements enter viewport
+ */
+document.addEventListener('DOMContentLoaded', function () {
+    // Configuration for the observer
+    const observerOptions = {
+        root: null, // viewport
+        rootMargin: '0px 0px -100px 0px', // trigger slightly before element is fully visible
+        threshold: 0.15 // trigger when 15% of element is visible
+    };
+
+    // Callback function for intersection observer
+    const observerCallback = (entries, observer) => {
+        entries.forEach(entry => {
+            // When element enters viewport
+            if (entry.isIntersecting) {
+                // Add 'animated' class to trigger the animation
+                entry.target.classList.add('animated');
+
+                // Optional: Stop observing after animation (one-time animation)
+                // Comment out the line below if you want animations to repeat
+                observer.unobserve(entry.target);
+            }
+        });
+    };
+
+    // Create the intersection observer
+    const scrollObserver = new IntersectionObserver(observerCallback, observerOptions);
+
+    // Select all elements with animation class
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+
+    // Start observing each element
+    animatedElements.forEach(element => {
+        scrollObserver.observe(element);
+    });
+
+    // Handle elements that are already in viewport on page load
+    // This ensures immediate animation for above-the-fold content
+    setTimeout(() => {
+        animatedElements.forEach(element => {
+            const rect = element.getBoundingClientRect();
+            const isInViewport = (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+
+            if (isInViewport) {
+                element.classList.add('animated');
+            }
+        });
+    }, 100);
+});

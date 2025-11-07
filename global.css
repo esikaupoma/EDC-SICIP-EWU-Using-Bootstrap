@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Jost:wght@300;400;500;600&display=swap');
 
 :root {
+    /* Legacy colors - kept for compatibility */
     --orange: #ff7350;
     --teal: #125875;
     --dark-teal: #093f55;
@@ -9,42 +10,160 @@
     --dark-gray: #333333;
     --medium-gray: #666666;
     --light-gray: #CCCCCC;
+
+    /* Design System - OKLCH Color Palette */
+    /* Neutral palette - semantic naming */
+    --surface-base: oklch(98% 0 0);
+    /* Near white - main backgrounds */
+    --surface-elevated: oklch(100% 0 0);
+    /* Pure white - elevated cards */
+    --surface-subtle: oklch(96% 0 0);
+    /* Very light gray - subtle backgrounds */
+    --surface-muted: oklch(92% 0 0);
+    /* Light gray - muted sections */
+
+    --text-primary: oklch(25% 0 0);
+    /* Near black - main text */
+    --text-secondary: oklch(45% 0 0);
+    /* Dark gray - secondary text */
+    --text-muted: oklch(60% 0 0);
+    /* Medium gray - de-emphasized text */
+    --text-disabled: oklch(70% 0 0);
+    /* Light gray - disabled text */
+
+    --border-subtle: oklch(88% 0 0);
+    /* Very subtle borders */
+    --border-default: oklch(82% 0 0);
+    /* Default borders */
+    --border-emphasis: oklch(70% 0 0);
+    /* Emphasized borders */
+
+    /* Brand colors - OKLCH for consistency */
+    --brand-primary: oklch(62% 0.17 25);
+    /* Warm orange - primary actions */
+    --brand-primary-hover: oklch(58% 0.19 25);
+    /* Darker orange - hover state */
+    --brand-secondary: oklch(48% 0.12 220);
+    /* Deep teal - secondary elements */
+    --brand-secondary-light: oklch(55% 0.10 220);
+    /* Lighter teal */
+    --brand-accent: oklch(72% 0.08 220);
+    /* Light blue accent */
+
+    /* Semantic colors */
+    --semantic-success: oklch(65% 0.15 145);
+    --semantic-warning: oklch(75% 0.15 85);
+    --semantic-error: oklch(60% 0.20 25);
+    --semantic-info: oklch(65% 0.15 250);
+
+    /* Elevation system - Multi-layer shadows */
+    --shadow-sm:
+        0 1px 2px oklch(0% 0 0 / 0.04),
+        0 2px 4px oklch(0% 0 0 / 0.08);
+    --shadow-md:
+        0 2px 4px oklch(0% 0 0 / 0.06),
+        0 4px 8px oklch(0% 0 0 / 0.10);
+    --shadow-lg:
+        0 4px 6px oklch(0% 0 0 / 0.08),
+        0 8px 16px oklch(0% 0 0 / 0.12);
+    --shadow-xl:
+        0 8px 12px oklch(0% 0 0 / 0.10),
+        0 16px 24px oklch(0% 0 0 / 0.15);
+    --shadow-2xl:
+        0 16px 24px oklch(0% 0 0 / 0.12),
+        0 32px 48px oklch(0% 0 0 / 0.20);
+
+    /* Spacing scale - 8px base */
+    --space-xs: 0.5rem;
+    /* 8px */
+    --space-sm: 0.75rem;
+    /* 12px */
+    --space-md: 1rem;
+    /* 16px */
+    --space-lg: 1.5rem;
+    /* 24px */
+    --space-xl: 2rem;
+    /* 32px */
+    --space-2xl: 3rem;
+    /* 48px */
+    --space-3xl: 4rem;
+    /* 64px */
+    --space-4xl: 6rem;
+    /* 96px */
+
+    /* Typography scale - 1.250 (Major Third) ratio */
+    --text-xs: 0.8rem;
+    /* 12.8px */
+    --text-sm: 0.875rem;
+    /* 14px */
+    --text-base: 1rem;
+    /* 16px */
+    --text-lg: 1.125rem;
+    /* 18px */
+    --text-xl: 1.25rem;
+    /* 20px */
+    --text-2xl: 1.563rem;
+    /* 25px */
+    --text-3xl: 1.953rem;
+    /* 31.25px */
+    --text-4xl: 2.441rem;
+    /* 39px */
+    --text-5xl: 3.052rem;
+    /* 48.8px */
+
+    /* Line heights - inversely proportional */
+    --leading-tight: 1.2;
+    --leading-snug: 1.375;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.625;
+    --leading-loose: 1.75;
 }
 
 body {
     font-family: 'Roboto', sans-serif !important;
-    color: var(--dark-gray);
-    background-color: var(--white);
+    color: var(--text-primary);
+    background-color: var(--surface-base);
     margin: 0;
     padding-top: 90px;
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
 }
 
 h1,
 h2,
 h3,
 h4,
-h5,
-h6 {
+h5 {
     font-family: 'Jost', sans-serif !important;
+    line-height: var(--leading-tight);
+    font-weight: 600;
 }
 
+h6 {
+    font-family: 'Jost', sans-serif !important;
+    color: var(--text-primary);
+    line-height: var(--leading-tight);
+    font-weight: 600;
+}
 
 .btn-orange {
-    background-color: var(--orange);
-    color: var(--white);
+    background-color: var(--brand-primary);
+    color: var(--surface-elevated);
     border: none;
-    transition: 0.3s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-sm);
+    font-weight: 500;
 }
 
 .btn-orange:hover {
-    background-color: #d94d1f;
+    background-color: var(--brand-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
-
 
 .text-secondary {
-    color: var(--medium-gray) !important;
+    color: var(--text-secondary) !important;
 }
-
 
 
 /* ========================================== breadcrumbs========================================= */
@@ -62,7 +181,10 @@ h6 {
 .page-banner .banner-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to right, rgb(18 87 117 / 93%) 0%, rgb(18 88 117 / 73%) 50%, rgb(18 88 117 / 76%) 100%);
+    background: linear-gradient(to right,
+            oklch(48% 0.12 220 / 0.93) 0%,
+            oklch(48% 0.12 220 / 0.73) 50%,
+            oklch(48% 0.12 220 / 0.76) 100%);
     z-index: 1;
 }
 
@@ -79,9 +201,10 @@ h6 {
 }
 
 .page-title {
-    font-size: 42px;
+    font-size: var(--text-4xl);
     font-weight: 600;
     margin: 0;
+    letter-spacing: -0.02em;
 }
 
 
@@ -95,30 +218,35 @@ h6 {
 
 
 .banner-breadcrumb {
-    background: var(--orange);
+    background: var(--brand-primary);
     display: inline-flex;
-    padding: 10px 25px;
+    padding: var(--space-sm) var(--space-lg);
     border-radius: 40px;
-    font-size: 1.1rem;
-    color: var(--white);
+    font-size: var(--text-lg);
+    color: var(--surface-elevated);
     margin: 0;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--shadow-lg);
 }
 
 
 .banner-breadcrumb .breadcrumb-item+.breadcrumb-item::before {
     content: "|";
-    color: var(--white);
-    padding: 0 8px;
+    color: var(--surface-elevated);
+    padding: 0 var(--space-xs);
 }
 
 .banner-breadcrumb a {
-    color: var(--white);
+    color: var(--surface-elevated);
     text-decoration: none;
     font-weight: 500;
+    transition: opacity 0.2s ease;
+}
+
+.banner-breadcrumb a:hover {
+    opacity: 0.8;
 }
 
 .banner-breadcrumb .active {
-    color: var(--white);
+    color: var(--surface-elevated);
     opacity: 0.9;
 }
