@@ -53,7 +53,7 @@ h6 {
     background: url("Resources/images/breadcrumbs/breadcrumb1.png") center/cover no-repeat;
     color: var(--white);
     text-align: center;
-    height: 280px;
+    height: 300px;
     overflow: visible;
     font-family: 'Jost', sans-serif;
 }

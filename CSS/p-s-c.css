@@ -5,6 +5,7 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    overflow: hidden;
 }
 
 .committee-header {
@@ -12,34 +13,36 @@
     margin: 0 auto 50px;
 }
 
-
 .committee-description {
     color: #1a3365;
     font-size: 1.2rem;
     padding: 5px 10px;
 }
 
+/* ------------------------------------
+       MEMBERS GRID
+    ------------------------------------ */
 .members-grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
-    /* max-width: 1500px; */
+    gap: 25px;
     margin: 0 auto;
 }
 
 .member {
-    background-color: #ffffff;
+    background-color: var(--white);
     padding: 25px 20px;
+    /* border-radius: 12px; */
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
+    transition: all 0.4s ease;
     flex: 0 1 300px;
-    /* border: 2px solid #546b85; */
+    position: relative;
+    overflow: hidden;
+    transform: translateY(30px);
+    opacity: 0;
 }
 
-.member:hover {
-    transform: translateY(-5px);
-}
 
 .member img {
     width: 180px;
@@ -47,39 +50,30 @@
     object-fit: cover;
     /* border-radius: 50%; */
     margin-bottom: 15px;
-    border: 4px solid #ffc107;
+    border: 4px solid var(--orange);
+    transition: all 0.3s ease;
 }
+
 
 .member h3 {
     font-size: 1rem;
-    color: #1a3365;
+    color: var(--teal);
     margin-bottom: 10px;
+    font-weight: 600;
 }
 
 .member p {
     font-size: 0.9rem;
-    color: #1a3365;
-    /* line-height: 1.4; */
+    color: var(--dark-teal);
 }
 
-/* ============================ 1400px and below ============================ */
-@media screen and (max-width: 1400px) {
-    .committee-section {
-        padding: 200px 150px 150px;
-    }
 
-}
-
-/* ============================ 1200px and below ============================ */
 @media screen and (max-width: 1200px) {
     .committee-section {
-        padding: 200px 50px 150px;
+        padding: 120px 50px 120px;
     }
-
 }
 
-
-/* ============================ 992px and below ============================ */
 @media screen and (max-width: 992px) {
     .member img {
         width: 160px;
@@ -87,52 +81,20 @@
     }
 
     .committee-section {
-        padding: 180px 30px 130px;
+        padding: 100px 30px;
     }
-
-    .committee-description {
-        font-size: 1rem;
-    }
-
-    .committee-header h2 {
-        font-size: 1.7rem;
-        margin-bottom: 10px;
-    }
-
-    .member h3 {
-        font-size: 0.9rem;
-    }
-
-
 }
 
-
-/* ============================ 768px and below ============================ */
-@media screen and (max-width: 768px) {
-    .committee-section {
-        padding: 180px 20px 130px;
-    }
-
-
-}
-
-
-/* ============================ 480px and below ============================ */
 @media screen and (max-width: 480px) {
     .committee-section {
-        padding: 150px 20px 80px;
+        padding: 80px 20px;
     }
 
     .committee-description {
         font-size: 0.9rem;
-    }
-
-    .committee-header h2 {
-        font-size: 1.3rem;
     }
 
     .member p {
         font-size: 0.8rem;
     }
-
 }
