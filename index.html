@@ -24,7 +24,7 @@
 
 
     <!-- Global and Component CSS -->
-    <link rel="stylesheet" href="/global.css">
+    <link rel="stylesheet" href="global.css">
     <link rel="stylesheet" href="Components/header.css">
     <link rel="stylesheet" href="Components/footer.css">
     <link rel="stylesheet" href="CSS/home.css">
@@ -48,21 +48,21 @@
         <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="Resources/images/herobg/herobg1.jpg" class="d-block w-100 hero-img" alt="Slide 1">
+                    <img src="/Resources/images/herobg/herobg1.jpg" class="d-block w-100 hero-img" alt="Slide 1">
                 </div>
                 <div class="carousel-item">
-                    <img src="Resources/images/herobg/herobg2.jpg" class="d-block w-100 hero-img" alt="Slide 2">
+                    <img src="/Resources/images/herobg/herobg2.jpg" class="d-block w-100 hero-img" alt="Slide 2">
                 </div>
                 <div class="carousel-item">
-                    <img src="Resources/images/herobg/herobg3.jpg" class="d-block w-100 hero-img" alt="Slide 3">
+                    <img src="/Resources/images/herobg/herobg3.jpg" class="d-block w-100 hero-img" alt="Slide 3">
                 </div>
                 <div class="carousel-item">
-                    <img src="Resources/images/herobg/herobg4.jpg" class="d-block w-100 hero-img" alt="Slide 4">
+                    <img src="/Resources/images/herobg/herobg4.jpg" class="d-block w-100 hero-img" alt="Slide 4">
                 </div>
             </div>
 
             <!-- Carousel Controls -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <!-- <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon">
                     <i class="fas fa-chevron-left"></i>
                 </span>
@@ -73,13 +73,12 @@
                     <i class="fas fa-chevron-right"></i>
                 </span>
                 <span class="visually-hidden">Next</span>
-            </button>
+            </button> -->
         </div>
 
         <!-- Overlay -->
         <div class="hero-overlay position-absolute top-0 start-0 w-100 h-100"></div>
-
-        <!-- Hero Content - Bootstrap Grid -->
+        <!-- Hero Content -->
         <div class="container position-absolute top-50 start-50 translate-middle hero-content">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
@@ -319,7 +318,7 @@
 
 
     <!-------------------------------------------Gallery Carousel Section-------------------------------------------->
-    <section class="edc-gallery-section py-5 bg-light animate-on-scroll">
+    <section class="edc-gallery-section py-5 bg-light">
         <div class="container">
 
             <div class="title-class mb-3 mt-3">
@@ -363,7 +362,7 @@
                         <img src="Resources/images/Carousel/SigingCeremony_1.png" class="d-block w-100" alt="Slide 3">
                         <div class="carousel-caption d-none d-md-block bg-gradient rounded-3 p-3">
                             <h5>Official Moments</h5>
-                            <p>Memorable official moments at the ceremony.</p>
+                            <p>Memorable official moments at the signing ceremony.</p>
                         </div>
                     </div>
                     <div class="carousel-item">
@@ -371,7 +370,7 @@
                             alt="Slide 4">
                         <div class="carousel-caption d-none d-md-block bg-gradient rounded-3 p-3">
                             <h5>Celebration Ceremony</h5>
-                            <p>Joyful moments captured during celebrations.</p>
+                            <p>Joyful moments captured during Celebration Ceremony.</p>
                         </div>
                     </div>
                     <div class="carousel-item">
@@ -379,7 +378,7 @@
                             alt="Slide 5">
                         <div class="carousel-caption d-none d-md-block bg-gradient rounded-3 p-3">
                             <h5>Event Highlights</h5>
-                            <p>Some highlights of our celebratory events.</p>
+                            <p>Some highlights of our Celebration Ceremony.</p>
                         </div>
                     </div>
                 </div>
@@ -418,7 +417,7 @@
                     <div class="title-class">
                         <div class="news-title-bar">
                             <h2><span id="news-title">Recent News</span></h2>
-                            <a href="/news" class="view-all-button">View All</a>
+                            <a href="/HTML/news.html" class="view-all-button">View All</a>
                         </div>
                     </div>
                 </div>
@@ -427,9 +426,29 @@
             <div class="row">
                 <div class="col-12">
                     <div class="news-carousel">
+                        <div class="news-item">
+                            <a href="/HTML/news.html?id=1">
+                                <div class="image-container">
+                                    <div class="news-date">25<br>Sept<br>2025</div>
+                                    <img src="/Resources/images/InternshipMeeting/1.jpeg" alt="blf" />
+                                </div>
+                                <p class="news-title">Discussion on establishing industry linkages for internships and
+                                    job placements</p>
+                            </a>
+                        </div>
 
                         <div class="news-item">
-                            <a href="/HTML/news-details.html?id=1">
+                            <a href="/HTML/news.html?id=2">
+                                <div class="image-container">
+                                    <div class="news-date">10<br>Sept<br>2025</div>
+                                    <img src="/Resources/images/OrientationBatch_7_8/Orien1.jpg" alt="blf" />
+                                </div>
+                                <p class="news-title">Orientation Program for Batch-7 and Batch-8</p>
+                            </a>
+                        </div>
+
+                        <div class="news-item">
+                            <a href="/HTML/news.html?id=3">
                                 <div class="image-container">
                                     <div class="news-date">24<br>July<br>2025</div>
                                     <img src="Resources/images/BLF/BLF_1.jpeg" alt="blf" />
@@ -440,7 +459,7 @@
                         </div>
 
                         <div class="news-item">
-                            <a href="/HTML/news-details.html?id=2">
+                            <a href="/HTML/news.html?id=4">
                                 <div class="image-container">
                                     <div class="news-date">19<br>July<br>2025</div>
                                     <img src="Resources/images/FGD/FGD_EDC_EWU_2.jpeg" alt="FGD on GDLFM Program" />
@@ -450,30 +469,10 @@
                             </a>
                         </div>
 
-                        <div class="news-item">
-                            <a href="/HTML/news-details.html?id=3">
-                                <div class="image-container">
-                                    <div class="news-date">13<br>May<br>2025</div>
-                                    <img src="Resources/images/News/Orientation-Batch-5&6.jpg"
-                                        alt="Orientation Program for Batch 5 & 6" />
-                                </div>
-                                <p class="news-title">Orientation Program for Batch 5 and Batch 6</p>
-                            </a>
-                        </div>
+
 
                         <div class="news-item">
-                            <a href="/HTML/news-details.html?id=4">
-                                <div class="image-container">
-                                    <div class="news-date">15<br>Jan<br>2025</div>
-                                    <img src="/Resources/images/News/Orientation-Batch-3&4.jpg"
-                                        alt="Orientation Program for Batch 3 & 4" />
-                                </div>
-                                <p class="news-title">Orientation Program for Batch 3 and Batch 4</p>
-                            </a>
-                        </div>
-
-                        <div class="news-item">
-                            <a href="/HTML/news-details.html?id=5">
+                            <a href="/HTML/news.html?id=5">
                                 <div class="image-container">
                                     <div class="news-date">08<br>Dec<br>2024</div>
                                     <img src="Resources/images/News/celebration_ceremony.jpg"
@@ -526,7 +525,7 @@
                 <div class="col-12">
                     <div class="title-class">
                         <h2 id="notice-title">Notice Board</h2>
-                        <a href="/notice-board.html" class="view-all-button">View All</a>
+                        <a href="/HTML/notice.html" class="view-all-button">View All</a>
                     </div>
                 </div>
             </div>

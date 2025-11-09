@@ -181,7 +181,8 @@
 
 .news-body p {
     margin-bottom: var(--space-lg);
-    text-align: left;
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 

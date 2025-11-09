@@ -4,6 +4,7 @@
     /* Legacy colors - kept for compatibility */
     --orange: #ff7350;
     --teal: #125875;
+    --light-teal: #3188ad;
     --dark-teal: #093f55;
     --light-blue: #E9F2F3;
     --white: #FFFFFF;
@@ -147,7 +148,7 @@ h6 {
 }
 
 .btn-orange {
-    background-color: var(--brand-primary);
+    background-color: var(--orange);
     color: var(--surface-elevated);
     border: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -169,7 +170,7 @@ h6 {
 /* ========================================== breadcrumbs========================================= */
 .page-banner {
     position: relative;
-    background: url("Resources/images/breadcrumbs/breadcrumb1.png") center/cover no-repeat;
+    background: url("/Resources/images/breadcrumbs/breadcrumb1.png") center/cover no-repeat;
     color: var(--white);
     text-align: center;
     height: 300px;
@@ -218,7 +219,7 @@ h6 {
 
 
 .banner-breadcrumb {
-    background: var(--brand-primary);
+    background: var(--orange);
     display: inline-flex;
     padding: var(--space-sm) var(--space-lg);
     border-radius: 40px;

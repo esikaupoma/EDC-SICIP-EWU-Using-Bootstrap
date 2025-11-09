@@ -78,7 +78,7 @@
 
 .hero-title {
     letter-spacing: -0.01em;
-    color: var(--surface-elevated);
+    /* color: var(--surface-elevated); */
     text-shadow:
         0 2px 8px rgba(0, 0, 0, 0.4),
         0 4px 16px rgba(0, 0, 0, 0.3);
@@ -87,18 +87,22 @@
 }
 
 .text-highlight {
-    color: var(--brand-primary);
-    font-weight: 600;
+    /* color: var(--orange); */
+    font-weight: 200;
     text-shadow:
         0 2px 8px rgba(0, 0, 0, 0.4),
         0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 .text-accent {
-    color: var(--brand-accent);
-    font-weight: 500;
+    color: var(--white);
+    font-weight: 600;
     text-shadow:
         0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.text-light {
+    font-size: 1rem;
 }
 
 /* Professional Carousel Controls */
@@ -136,7 +140,7 @@
     border: 2px solid rgba(255, 255, 255, 0.3);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: cvar(--orange)enter;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     background-image: none;
 }
@@ -158,8 +162,8 @@
 
 /* Buttons - Enhanced with proper elevation */
 .btn-apply {
-    background: var(--brand-primary);
-    color: var(--surface-elevated);
+    background: var(--teal);
+    color: var(--white);
     border-radius: 50px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 2px solid transparent;
@@ -169,17 +173,16 @@
 }
 
 .btn-apply:hover {
-    background: var(--brand-primary-hover);
-    border-color: transparent;
-    color: var(--surface-elevated);
-    transform: translateY(-3px);
+    background: transparent;
+    border-color: var(--teal);
+    color: var(--light-teal);
     box-shadow: var(--shadow-xl);
 }
 
 .btn-contact {
     background: transparent;
-    border: 2px solid var(--brand-accent);
-    color: var(--brand-accent);
+    border: 2px solid var(--orange);
+    color: var(--orange);
     border-radius: 50px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     font-weight: 600;
@@ -188,8 +191,8 @@
 }
 
 .btn-contact:hover {
-    background: var(--brand-accent);
-    color: var(--brand-secondary);
+    background: var(--orange);
+    color: var(--white);
     transform: translateY(-3px);
     box-shadow: var(--shadow-lg);
 }
@@ -465,7 +468,7 @@
     margin-left: -150px;
     position: relative;
     z-index: 1;
-    border-right: 5px solid var(--brand-primary);
+    border-right: 5px solid var(--orange);
     box-shadow: var(--shadow-lg);
 }
 
@@ -495,7 +498,7 @@
     object-fit: contain;
     position: relative;
     z-index: 2;
-    border: 5px solid var(--brand-primary);
+    border: 5px solid var(--orange);
     box-shadow: var(--shadow-md);
 }
 
@@ -532,7 +535,7 @@
 
 .btn-primary {
     display: inline-block;
-    background-color: var(--brand-primary);
+    background-color: var(--orange);
     color: var(--surface-elevated);
     padding: var(--space-sm) var(--space-xl);
     border-radius: 50px;
@@ -559,7 +562,7 @@
 .admission-box {
     background-color: var(--surface-elevated);
     padding: var(--space-xl);
-    border-left: 5px solid var(--brand-primary);
+    border-left: 5px solid var(--orange);
     border-radius: 12px;
     box-shadow: var(--shadow-md);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -571,7 +574,7 @@
 }
 
 .admission-box h3 {
-    color: var(--brand-primary);
+    color: var(--orange);
     margin-bottom: var(--space-sm);
     font-size: var(--text-xl);
     font-weight: 600;
@@ -586,7 +589,7 @@
 .admission-buttons .btn-secondary,
 .admission-box .btn-secondary {
     display: inline-block;
-    background-color: var(--brand-primary);
+    background-color: var(--orange);
     color: var(--surface-elevated);
     padding: var(--space-xs) var(--space-lg);
     border-radius: 50px;
@@ -719,7 +722,7 @@
     left: 0;
     width: 60px;
     height: 4px;
-    background: linear-gradient(90deg, var(--brand-primary), transparent);
+    background: linear-gradient(90deg, var(--orange), transparent);
     border-radius: 2px;
 }
 
@@ -764,22 +767,22 @@
     padding: 200px var(--space-md) var(--space-xl);
     width: 220px;
     position: relative;
-    background: var(--surface-elevated);
-    border-radius: 12px;
-    box-shadow: var(--shadow-md);
+    /* background: var(--surface-elevated); */
+    /* border-radius: 12px; */
+    /* box-shadow: var(--shadow-md); */
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .member:hover {
     transform: translateY(-8px);
-    box-shadow: var(--shadow-xl);
+    /* box-shadow: var(--shadow-xl); */
 }
 
 .member img {
     width: 200px;
     height: 200px;
     object-fit: cover;
-    border: 4px solid var(--brand-primary);
+    border: 4px solid var(--orange);
     background-color: var(--surface-elevated);
     position: absolute;
     top: -0px;
@@ -810,7 +813,7 @@
     display: inline-block;
     background: none;
     border: none;
-    color: var(--brand-primary);
+    color: var(--orange);
     font-size: var(--text-sm);
     font-weight: 600;
     text-decoration: none;
@@ -898,7 +901,7 @@
     flex: 0 0 auto;
     width: 280px;
     background-color: var(--surface-elevated);
-    border-radius: 12px;
+    /* border-radius: 12px; */
     overflow: hidden;
     box-shadow: var(--shadow-md);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1088,7 +1091,7 @@
             oklch(62% 0.17 25 / 0.04),
             oklch(62% 0.17 25 / 0.02));
     padding-left: var(--space-sm);
-    border-left: 3px solid var(--brand-primary);
+    border-left: 3px solid var(--orange);
 }
 
 .notice-list li:last-child {
@@ -1113,24 +1116,24 @@
 }
 
 .notice-list li:hover .notice-text {
-    color: var(--brand-primary);
+    color: var(--orange);
 }
 
 .read-more-btn {
     text-decoration: none;
-    color: var(--brand-primary);
+    color: var(--orange);
     font-size: var(--text-sm);
     padding: var(--space-xs) var(--space-md);
     font-weight: 600;
     white-space: nowrap;
-    border: 2px solid var(--brand-primary);
+    border: 2px solid var(--orange);
     border-radius: 50px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: var(--shadow-sm);
 }
 
 .read-more-btn:hover {
-    background-color: var(--brand-primary);
+    background-color: var(--orange);
     color: var(--surface-elevated);
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
