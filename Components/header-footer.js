@@ -1,11 +1,22 @@
+function loadGlobalCSS() {
+    if (!document.getElementById('global-css')) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = '/global.css';
+        link.id = 'global-css';
+        document.head.appendChild(link);
+    }
+}
+
 class SiteHeader extends HTMLElement {
     connectedCallback() {
+        loadGlobalCSS();
+
         fetch("/Components/header.html")
             .then(res => res.text())
             .then(html => {
                 this.innerHTML = html;
 
-                // Dynamically load CSS if not already loaded
                 if (!document.getElementById('header-css')) {
                     const link = document.createElement('link');
                     link.rel = 'stylesheet';
@@ -20,6 +31,8 @@ class SiteHeader extends HTMLElement {
 
 class SiteFooter extends HTMLElement {
     connectedCallback() {
+        loadGlobalCSS();
+
         fetch("/Components/footer.html")
             .then(res => res.text())
             .then(html => {
