@@ -1,242 +1,116 @@
-/**
- * News Details Page - Dynamic Content Loader
- * Loads and displays individual news articles from JSON data
- */
+document.addEventListener("DOMContentLoaded", async () => {
 
-(function () {
-    'use strict';
+    const newsContainer = document.getElementById("news-container");
+    const pageNumbersContainer = document.getElementById("page-numbers");
+    const prevPageItem = document.getElementById("prev-page");
+    const nextPageItem = document.getElementById("next-page");
 
-    // Configuration
-    const CONFIG = {
-        newsDataPath: '/Resources/files/news-data.json',
-        dateFormat: {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        }
-    };
+    const newsPerPage = 9;
+    let currentPage = 1;
+    let newsData = [];
 
-    // DOM Elements
-    const elements = {
-        loadingState: document.getElementById('loading-state'),
-        errorState: document.getElementById('error-state'),
-        newsContent: document.getElementById('news-content'),
-        newsTitle: document.getElementById('news-title'),
-        newsDate: document.getElementById('news-date'),
-        newsBody: document.getElementById('news-body'),
-        carouselInner: document.getElementById('carousel-inner'),
-        carouselIndicators: document.getElementById('carousel-indicators'),
-        breadcrumbTitle: document.getElementById('breadcrumb-title')
-    };
+    // Load JSON
+    try {
+        const res = await fetch("/Resources/files/news-data.json");
+        const data = await res.json();
 
-    /**
-     * Get URL parameter value
-     * @param {string} param - Parameter name
-     * @returns {string|null} Parameter value
-     */
-    function getURLParameter(param) {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(param);
+        // remove duplicates by ID
+        const map = new Map();
+        data.forEach(item => map.set(item.id, item));
+        newsData = [...map.values()];
+
+        // sort latest → oldest
+        newsData.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        renderNews();
+    } catch (error) {
+        console.error("Error loading news:", error);
     }
 
-    /**
-     * Format date string to readable format
-     * @param {string} dateString - ISO date string
-     * @returns {string} Formatted date
-     */
-    function formatDate(dateString) {
-        try {
-            const date = new Date(dateString);
-            return date.toLocaleDateString('en-US', CONFIG.dateFormat);
-        } catch (error) {
-            console.error('Error formatting date:', error);
-            return dateString;
-        }
-    }
+    function renderNews() {
+        newsContainer.innerHTML = "";
+        const start = (currentPage - 1) * newsPerPage;
+        const pageItems = newsData.slice(start, start + newsPerPage);
 
-    /**
-     * Create carousel indicators
-     * @param {number} count - Number of images
-     * @returns {string} HTML for indicators
-     */
-    function createCarouselIndicators(count) {
-        let html = '';
-        for (let i = 0; i < count; i++) {
-            const activeClass = i === 0 ? 'active' : '';
-            const ariaCurrent = i === 0 ? 'aria-current="true"' : '';
-            html += `
-                <button type="button" 
-                        data-bs-target="#newsCarousel" 
-                        data-bs-slide-to="${i}" 
-                        class="${activeClass}" 
-                        ${ariaCurrent}
-                        aria-label="Slide ${i + 1}">
-                </button>
-            `;
-        }
-        return html;
-    }
+        pageItems.forEach(item => {
+            
+            // Convert date → DAY + MONTH + YEAR
+            const dateObj = new Date(item.date);
+            const day = dateObj.getDate();
+            const month = dateObj.toLocaleString("en-US", { month: "short" }).toUpperCase();
+            const year = dateObj.getFullYear();
 
-    /**
-     * Create carousel items
-     * @param {Array} images - Array of image URLs
-     * @param {string} title - News title for alt text
-     * @returns {string} HTML for carousel items
-     */
-    function createCarouselItems(images, title) {
-        return images.map((image, index) => {
-            const activeClass = index === 0 ? 'active' : '';
-            return `
-                <div class="carousel-item ${activeClass}">
-                    <img src="${image}" 
-                         class="d-block w-100" 
-                         alt="${title} - Image ${index + 1}"
-                         loading="${index === 0 ? 'eager' : 'lazy'}">
+            const col = document.createElement("div");
+            col.className = "col-lg-4 col-md-6";
+
+            col.innerHTML = `
+                <div class="news-card" onclick="location.href='/HTML/news-details.html?id=${item.id}'">
+
+                    <div class="news-image-wrapper">
+                        <img src="${item.hero_image}" class="news-image news-img" alt="News Image">
+
+                        <!-- BLUE DATE BADGE -->
+                        <div class="news-date-badge">
+                            <span class="date-day">${day}</span>
+                            <span class="date-month">${month}</span>
+                            <span class="date-year">${year}</span>
+                        </div>
+                    </div>
+
+                    <div class="news-card-body">
+                        <div class="news-title">${item.title}</div>
+                    </div>
                 </div>
             `;
-        }).join('');
+
+            newsContainer.appendChild(col);
+        });
+
+        renderPagination();
     }
 
-    /**
-     * Sanitize HTML content (basic sanitization)
-     * @param {string} html - HTML string
-     * @returns {string} Sanitized HTML
-     */
-    function sanitizeHTML(html) {
-        const temp = document.createElement('div');
-        temp.textContent = html;
-        return temp.innerHTML;
-    }
+    function renderPagination() {
+        pageNumbersContainer.innerHTML = "";
+        const totalPages = Math.ceil(newsData.length / newsPerPage);
 
-    /**
-     * Process and display news content
-     * @param {Object} newsItem - News article object
-     */
-    function displayNews(newsItem) {
-        // Set title
-        elements.newsTitle.textContent = newsItem.title;
-        document.title = `${newsItem.title} - EDC-SICIP-EWU`;
-        elements.breadcrumbTitle.textContent = newsItem.title.substring(0, 50) +
-            (newsItem.title.length > 50 ? '...' : '');
+        for (let i = 1; i <= totalPages; i++) {
+            const li = document.createElement("li");
+            li.className = "page-item" + (i === currentPage ? " active" : "");
 
-        // Set date
-        elements.newsDate.textContent = formatDate(newsItem.date);
-        elements.newsDate.setAttribute('datetime', newsItem.date);
+            const a = document.createElement("a");
+            a.href = "#";
+            a.className = "page-link";
+            a.textContent = i;
 
-        // Set up carousel
-        const images = newsItem.gallery && newsItem.gallery.length > 0
-            ? newsItem.gallery
-            : [newsItem.hero_image];
+            a.onclick = (e) => {
+                e.preventDefault();
+                currentPage = i;
+                renderNews();
+            };
 
-        if (images.length > 1) {
-            elements.carouselIndicators.innerHTML = createCarouselIndicators(images.length);
-        } else {
-            elements.carouselIndicators.style.display = 'none';
+            li.appendChild(a);
+            pageNumbersContainer.appendChild(li);
         }
 
-        elements.carouselInner.innerHTML = createCarouselItems(images, newsItem.title);
-
-        // Set content - directly insert HTML (ensure your JSON is from a trusted source)
-        elements.newsBody.innerHTML = newsItem.content;
-
-        // Hide loading, show content
-        elements.loadingState.classList.add('d-none');
-        elements.newsContent.classList.remove('d-none');
-
-        // Smooth scroll to top
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        prevPageItem.classList.toggle("disabled", currentPage === 1);
+        nextPageItem.classList.toggle("disabled", currentPage === totalPages);
     }
 
-    /**
-     * Show error state
-     * @param {string} message - Error message
-     */
-    function showError(message = 'Unable to load news article') {
-        console.error(message);
-        elements.loadingState.classList.add('d-none');
-        elements.errorState.classList.remove('d-none');
-        elements.errorState.querySelector('p').textContent = message;
-    }
-
-    /**
-     * Load news data and display article
-     */
-    async function loadNewsDetails() {
-        try {
-            // Get news ID from URL
-            const newsId = getURLParameter('id');
-
-            if (!newsId) {
-                showError('No news article specified. Please select an article from the news page.');
-                return;
-            }
-
-            // Fetch news data
-            const response = await fetch(CONFIG.newsDataPath);
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const newsData = await response.json();
-
-            // Find the specific news item
-            const newsItem = newsData.find(item => item.id === parseInt(newsId));
-
-            if (!newsItem) {
-                showError(`News article with ID ${newsId} not found.`);
-                return;
-            }
-
-            // Display the news
-            displayNews(newsItem);
-
-        } catch (error) {
-            console.error('Error loading news details:', error);
-            showError('An error occurred while loading the news article. Please try again later.');
+    prevPageItem.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (currentPage > 1) {
+            currentPage--;
+            renderNews();
         }
-    }
+    });
 
-    /**
-     * Handle image load errors
-     */
-    function handleImageErrors() {
-        document.addEventListener('error', function (e) {
-            if (e.target.tagName === 'IMG') {
-                console.error('Image failed to load:', e.target.src);
-                e.target.src = '/Resources/images/placeholder.jpg'; // Fallback image
-                e.target.alt = 'Image not available';
-            }
-        }, true);
-    }
-
-    /**
-     * Initialize the page
-     */
-    function init() {
-        // Check if all required elements exist
-        const missingElements = Object.entries(elements)
-            .filter(([key, element]) => !element)
-            .map(([key]) => key);
-
-        if (missingElements.length > 0) {
-            console.error('Missing required elements:', missingElements);
-            showError('Page initialization error. Please refresh the page.');
-            return;
+    nextPageItem.addEventListener("click", (e) => {
+        e.preventDefault();
+        const totalPages = Math.ceil(newsData.length / newsPerPage);
+        if (currentPage < totalPages) {
+            currentPage++;
+            renderNews();
         }
+    });
 
-        // Set up error handling for images
-        handleImageErrors();
-
-        // Load news details
-        loadNewsDetails();
-    }
-
-    // Initialize when DOM is ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-    } else {
-        init();
-    }
-
-})();
+});

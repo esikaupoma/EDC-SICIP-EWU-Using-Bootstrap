@@ -3,6 +3,7 @@
 :root {
     /* Legacy colors - kept for compatibility */
     --orange: #ff7350;
+    --light-orange:#fc886a;
     --teal: #125875;
     --light-teal: #3188ad;
     --dark-teal: #093f55;
@@ -11,6 +12,7 @@
     --dark-gray: #333333;
     --medium-gray: #666666;
     --light-gray: #CCCCCC;
+    --orange-dark-hover: #ff5e35;
 
     /* Design System - OKLCH Color Palette */
     /* Neutral palette - semantic naming */
@@ -42,7 +44,7 @@
     /* Brand colors - OKLCH for consistency */
     --brand-primary: oklch(62% 0.17 25);
     /* Warm orange - primary actions */
-    --brand-primary-hover: oklch(58% 0.19 25);
+    --brand-primary-hover: #ff5e35;
     /* Darker orange - hover state */
     --brand-secondary: oklch(48% 0.12 220);
     /* Deep teal - secondary elements */
@@ -147,20 +149,64 @@ h6 {
     font-weight: 600;
 }
 
-.btn-orange {
-    background-color: var(--orange);
-    color: var(--surface-elevated);
-    border: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: var(--shadow-sm);
-    font-weight: 500;
+/* ---------------- Reusable Global Button ---------------- */
+.btn-global,
+.orange-btn,
+.blue-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0.9rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 400;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 0.3rem;
+  letter-spacing: 0.05em;
+  border: 2px solid transparent;
+  transition: background 0.4s ease, color 0.4s ease;
 }
 
-.btn-orange:hover {
-    background-color: var(--brand-primary-hover);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+/* Shared icon behavior */
+.btn-global i,
+.orange-btn i,
+.blue-btn i {
+  font-size: 0.9rem;
+  transition: transform 0.3s ease;
 }
+
+.btn-global:hover i,
+.orange-btn:hover i,
+.blue-btn:hover i {
+  transform: translateX(5px);
+}
+
+/* ---------------- Blue Button (Apply) ---------------- */
+.blue-btn {
+  background: var(--teal);
+  color: var(--white);
+  border: 1px solid var(--light-teal);
+}
+
+.blue-btn:hover {
+  background: transparent;
+  color: var(--light-teal);
+}
+
+/* ---------------- Orange Button (Contact) ---------------- */
+.orange-btn {
+  background: var(--orange);
+  color: var(--white);
+  border: 1px solid var(--light-orange);
+}
+
+.orange-btn:hover {
+  background: transparent;
+  color: var(--orange);
+}
+
 
 .text-secondary {
     color: var(--text-secondary) !important;
@@ -250,4 +296,30 @@ h6 {
 .banner-breadcrumb .active {
     color: var(--surface-elevated);
     opacity: 0.9;
+}
+
+
+/* ---------------- reuse TITLE DESIGN ---------------- */
+.title-class h2 {
+  font-size: var(--text-3xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  margin-bottom: 0;
+}
+
+.title-class h2 span {
+  position: relative;
+  display: inline-block;
+}
+
+.title-class h2 span::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: var(--orange);
+  border-radius: 3px;
 }
